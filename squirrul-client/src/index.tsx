@@ -3,16 +3,91 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Router, View } from "react-navi";
 import HelmetProvider from "react-navi-helmet-async";
-import api, { Acorn } from "./lib/api";
+import api, { Acorn as AcornType } from "./lib/api";
 import * as serviceWorker from "./serviceWorker";
+import "./style.scss";
 
-const Dashboard: React.FC<{ tags: string[]; acorns: Acorn[] }> = ({
+// const useForm = (initialState, callback: any) => {
+//   const [values, setValues] = useState(initialState);
+
+//   const handleSubmit = (event) => {
+//     if (event) event.preventDefault();
+//     // console.log({ values });
+//     callback(values);
+//   };
+
+//   const handleChange = (name) => (event) => {
+//     event.persist();
+
+//     setValues((values) => set({ ...values }, name, event.target.value));
+//   };
+
+//   const setFieldValue = (field: string, value: any) => {
+//     setValues((values) => set({ ...values }, field, value));
+//   };
+
+//   return {
+//     setFieldValue,
+//     handleChange,
+//     handleSubmit,
+//     values,
+//     setValues,
+//   };
+// };
+
+const Acorn: React.FC<{ acorn: AcornType }> = ({ acorn }) => {
+  return (
+    <div id="acorn">
+      <h1
+      //contentEditable onInput={console.log}
+      >
+        {acorn.name}
+      </h1>
+      <main
+      //contentEditable onInput={console.log}
+      >
+        {acorn.body}
+      </main>
+    </div>
+  );
+};
+
+const TagsList: React.FC<{ tags: string[] }> = ({ tags }) => (
+  <div id="tags">
+    <ol>
+      {tags.map((tag) => (
+        <li key={tag}>{tag}</li>
+      ))}
+    </ol>
+  </div>
+);
+
+const AcornsList: React.FC<{ acorns: AcornType[] }> = ({ acorns }) => (
+  <div id="acorns">
+    <ol>
+      {acorns.map((acorn) => (
+        <li key={acorn.id}>
+          {acorn.body.slice(0, 50)}
+          {/* {acorn.acorns_tags.map(({ tag }) => (
+            <span className="tag" key={tag.name}>
+              {tag.name}
+            </span>
+          ))} */}
+        </li>
+      ))}
+    </ol>
+  </div>
+);
+
+const Dashboard: React.FC<{ tags: string[]; acorns: AcornType[] }> = ({
   tags,
   acorns,
 }) => (
-  <div>
-    {JSON.stringify(tags)} {JSON.stringify(acorns)}
-  </div>
+  <>
+    <TagsList tags={tags} />
+    <AcornsList acorns={acorns} />
+    <Acorn acorn={acorns[0]} />
+  </>
 );
 
 const Layout: React.FC<{

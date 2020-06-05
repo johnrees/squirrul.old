@@ -6,10 +6,15 @@ export interface Tag {
   name: string;
 }
 
+interface AcornTag {
+  tag: Tag;
+}
+
 export interface Acorn {
   id: number;
   name?: string;
   body: string;
+  acorns_tags: AcornTag[];
 }
 
 export const GET_TAGS = gql`
@@ -23,8 +28,14 @@ export const GET_TAGS = gql`
 export const GET_ACORNS = gql`
   query GetAcorns {
     acorns(order_by: { id: asc }) {
+      id
       name
       body
+      acorns_tags {
+        tag {
+          name
+        }
+      }
     }
   }
 `;
