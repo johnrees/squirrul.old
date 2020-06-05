@@ -1,0 +1,32 @@
+- table:
+    schema: public
+    name: acorns
+  array_relationships:
+  - name: acorns_tags
+    using:
+      foreign_key_constraint_on:
+        column: acorn_id
+        table:
+          schema: public
+          name: acorns_tags
+- table:
+    schema: public
+    name: acorns_tags
+  object_relationships:
+  - name: acorn
+    using:
+      foreign_key_constraint_on: acorn_id
+  - name: tag
+    using:
+      foreign_key_constraint_on: tag_id
+- table:
+    schema: public
+    name: tags
+  array_relationships:
+  - name: acorns_tags
+    using:
+      foreign_key_constraint_on:
+        column: tag_id
+        table:
+          schema: public
+          name: acorns_tags
