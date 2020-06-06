@@ -19,6 +19,7 @@ const InlineEdit: React.FC<{
         }}
         value={value}
         autoFocus
+        tabIndex={0}
       />
     );
   } else {

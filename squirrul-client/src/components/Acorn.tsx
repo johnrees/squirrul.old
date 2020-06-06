@@ -1,5 +1,5 @@
 import React from "react";
-import { Acorn as AcornType } from "../lib/api";
+import api, { Acorn as AcornType } from "../lib/api";
 import useForm from "../lib/useForm";
 import InlineEdit from "./InlineEdit";
 
@@ -9,7 +9,9 @@ const Acorn: React.FC<{ acorn: AcornType }> = ({ acorn }) => {
       name: acorn.name,
       body: acorn.body,
     },
-    console.log
+    (data: AcornType) => {
+      api.updateAcorn({ ...data, id: acorn.id });
+    }
   );
 
   return (

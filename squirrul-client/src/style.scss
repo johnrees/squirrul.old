@@ -17,9 +17,24 @@ body {
   font-size: 14px;
 }
 
+span.tag {
+  padding: 2px 4px;
+  margin: 0 2px;
+  display: inline-block;
+  background: rgba(black, 0.1);
+}
+
 #root {
   display: flex;
   height: 100%;
+  > ol {
+    &,
+    > li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
 
   #tags {
     font-size: 0.8rem;
@@ -45,21 +60,25 @@ body {
       display: block;
       padding: 0.5rem;
       outline: none;
+      word-wrap: break-word;
     }
     h1,
     input {
       margin-bottom: 1rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
     main,
     textarea {
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 1.5;
       flex: 1;
     }
     textarea {
       resize: none;
       overflow: auto;
+    }
+    main p {
+      margin-bottom: 1em;
     }
   }
 
@@ -76,20 +95,4 @@ body {
       }
     }
   }
-
-  > ol {
-    &,
-    > li {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-  }
-}
-
-span.tag {
-  padding: 2px 4px;
-  margin: 0 2px;
-  display: inline-block;
-  background: rgba(black, 0.1);
 }

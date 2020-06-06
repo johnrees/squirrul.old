@@ -25,6 +25,17 @@ export const GET_TAGS = gql`
   }
 `;
 
+export const UPDATE_ACORN = gql`
+  mutation UpdateAcorn($id: Int!, $body: String = "", $name: String = null) {
+    update_acorns_by_pk(
+      pk_columns: { id: $id }
+      _set: { name: $name, body: $body }
+    ) {
+      id
+    }
+  }
+`;
+
 export const GET_ACORNS = gql`
   query GetAcorns {
     acorns(order_by: { id: asc }) {
@@ -52,6 +63,13 @@ const api = {
       query: GET_ACORNS,
     });
     return data.acorns;
+  },
+  updateAcorn: async function (variables: Acorn): Promise<any> {
+    const { data } = await gqlClient.mutate<{ acorn: Acorn }>({
+      mutation: UPDATE_ACORN,
+      variables,
+    });
+    return data;
   },
 };
 
