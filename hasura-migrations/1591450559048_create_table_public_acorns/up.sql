@@ -1,4 +1,5 @@
-CREATE TABLE "public"."acorns"("id" serial NOT NULL, "name" text NOT NULL, "body" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE TABLE "public"."acorns"("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text, "body" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE

@@ -9,7 +9,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
-  background: #222;
+  background: rgb(31, 31, 31);
   color: #ccc;
 }
 
@@ -37,6 +37,7 @@ span.tag {
   }
 
   #tags {
+    flex-shrink: 1;
     font-size: 0.8rem;
     background: rgba(black, 0.3);
     color: #ccc;
@@ -70,7 +71,7 @@ span.tag {
     main,
     textarea {
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.5rem;
       flex: 1;
     }
     textarea {
@@ -78,7 +79,14 @@ span.tag {
       overflow: auto;
     }
     main p {
-      margin-bottom: 1em;
+      margin-bottom: 1.5rem;
+    }
+    a {
+      text-decoration: none;
+      color: #00dcdc;
+      &:visited {
+        color: #b273ce;
+      }
     }
   }
 
