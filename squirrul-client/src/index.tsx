@@ -5,7 +5,7 @@ import NativeAcorn from "./components/NativeAcorn";
 import NativeAcornsList from "./components/NativeAcornsList";
 import NativeTagsList from "./components/NativeTagsList";
 import { gqlClient } from "./lib/gqlClient";
-import "./native.scss";
+// import "./native.scss";
 
 const App: React.FC = () => (
   <ApolloProvider client={gqlClient}>

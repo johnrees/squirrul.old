@@ -25,6 +25,7 @@ const NativeAcornsList: React.FC = () => {
 
 const styles = StyleSheet.create({
   acorns: {
+    padding: 10,
     width: 300,
     height: "100%",
     backgroundColor: "rgba(0,0,0,0.3)",

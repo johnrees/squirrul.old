@@ -34,6 +34,10 @@ const NativeAcorn: React.FC = () => (
 
 const styles = StyleSheet.create({
   acorn: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
     flex: 1,
   },
   header: {
