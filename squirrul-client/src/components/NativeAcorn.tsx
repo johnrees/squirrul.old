@@ -11,12 +11,9 @@ const Link: React.FC<any> = (props) => (
 
 const NativeAcorn: React.FC = () => (
   <View style={styles.acorn}>
+    <Text style={styles.heading}>This is an acorn!</Text>
     <Text style={styles.text as any}>
-      Acorn!
-      <Link href="https://github.com/facebook/create-react-app">
-        Create React App
-      </Link>{" "}
-      and{" "}
+      <Link href="https://github.com/facebook/create-react-app">Test</Link> and{" "}
       <Link href="https://github.com/necolas/react-native-web">
         React Native for Web
       </Link>
@@ -33,6 +30,10 @@ const NativeAcorn: React.FC = () => (
 );
 
 const styles = StyleSheet.create({
+  heading: {
+    fontSize: 30,
+    color: "white",
+  },
   acorn: {
     paddingTop: 10,
     paddingBottom: 10,
