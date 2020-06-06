@@ -1,4 +1,5 @@
 * {
+  box-sizing: border-box;
   font-family: "IBM Plex Sans", sans-serif;
   margin: 0;
   padding: 0;
@@ -22,7 +23,6 @@ body {
 
   #tags {
     font-size: 0.8rem;
-    min-width: 100px;
     background: rgba(black, 0.3);
     color: #ccc;
     li {
@@ -32,15 +32,39 @@ body {
   }
 
   #acorn {
+    flex: 1;
     padding: 10px 20px;
-    h1 {
-      margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    h1,
+    input,
+    main,
+    textarea {
+      width: 100%;
+      display: block;
+      padding: 0.5rem;
+      outline: none;
     }
-    line-height: 1.5;
+    h1,
+    input {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    main,
+    textarea {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+    textarea {
+      resize: none;
+      overflow: auto;
+    }
   }
 
   #acorns {
-    flex: 1;
+    width: 300px;
     background: rgba(black, 0.1);
     li {
       padding: 10px;
@@ -53,11 +77,13 @@ body {
     }
   }
 
-  ol,
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  > ol {
+    &,
+    > li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 
