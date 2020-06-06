@@ -1,7 +1,7 @@
 import { mount, route } from "navi";
 import React from "react";
-import { Dashboard } from "..";
 import api from "../lib/api";
+import { Dashboard } from "../oldindex";
 
 const routes = mount({
   "/:username": route({

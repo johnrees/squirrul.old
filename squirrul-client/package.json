@@ -23,6 +23,7 @@
     "navi": "^0.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-native-web": "^0.12.3",
     "react-navi": "^0.14.4",
     "react-navi-helmet-async": "^0.14.4",
     "react-scripts": "3.4.1",
@@ -53,6 +54,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.155",
     "@types/marked": "^0.7.4",
+    "@types/react-native": "^0.62.13",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5"
   }
