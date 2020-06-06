@@ -1,4 +1,4 @@
-import { mount, route } from "navi";
+import { ApolloProvider } from "@apollo/react-hooks";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Router, View } from "react-navi";
@@ -6,17 +6,19 @@ import HelmetProvider from "react-navi-helmet-async";
 import Acorn from "./components/Acorn";
 import AcornsList from "./components/AcornsList";
 import TagsList from "./components/TagsList";
-import api, { Acorn as AcornType } from "./lib/api";
+import { Acorn as AcornType } from "./lib/api";
+import { gqlClient } from "./lib/gqlClient";
+import routes from "./routes";
 import * as serviceWorker from "./serviceWorker";
 import "./style.scss";
 
-const Dashboard: React.FC<{ tags: string[]; acorns: AcornType[] }> = ({
+export const Dashboard: React.FC<{ tags: string[]; acorns: AcornType[] }> = ({
   tags,
   acorns,
 }) => (
   <>
     <TagsList tags={tags} />
-    <AcornsList acorns={acorns} />
+    <AcornsList />
     <Acorn acorn={acorns[0]} />
   </>
 );
@@ -26,19 +28,6 @@ const Layout: React.FC<{
 }> = ({ children }) => {
   return <>{children}</>;
 };
-
-const routes = mount({
-  "/": route({
-    async getView() {
-      const [tags, acorns] = await Promise.all([
-        api.getTags(),
-        api.getAcorns(),
-      ]);
-
-      return <Dashboard tags={tags} acorns={acorns} />;
-    },
-  }),
-});
 
 const App: React.FC = () => {
   return (
@@ -56,7 +45,9 @@ const App: React.FC = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={gqlClient}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -26,7 +26,7 @@ const InlineEdit: React.FC<{
     return (
       <PreviewTag
         onClick={() => setEditing(true)}
-        dangerouslySetInnerHTML={{ __html: marked(value) }}
+        dangerouslySetInnerHTML={{ __html: marked(value || "") }}
       />
     );
   }

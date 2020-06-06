@@ -10,7 +10,7 @@ const Acorn: React.FC<{ acorn: AcornType }> = ({ acorn }) => {
       body: acorn.body,
     },
     (data: AcornType) => {
-      api.updateAcorn({ ...data, id: acorn.id });
+      api("john").updateAcorn({ ...data, id: acorn.id });
     }
   );
 

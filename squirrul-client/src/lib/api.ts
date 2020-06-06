@@ -1,8 +1,10 @@
 import gql from "graphql-tag";
 import { gqlClient } from "./gqlClient";
 
+type UUID = string;
+
 export interface Tag {
-  id: number;
+  id: UUID;
   name: string;
 }
 
@@ -11,34 +13,29 @@ interface AcornTag {
 }
 
 export interface Acorn {
-  id: number;
+  id: UUID;
   name?: string;
   body: string;
   acorns_tags: AcornTag[];
 }
 
 export const GET_TAGS = gql`
-  query GetTags {
-    tags(order_by: { name: asc }) {
+  query GetTags($username: String!) {
+    tags(
+      order_by: { name: asc }
+      where: { creator: { username: { _eq: $username } } }
+    ) {
       name
     }
   }
 `;
 
-export const UPDATE_ACORN = gql`
-  mutation UpdateAcorn($id: Int!, $body: String = "", $name: String = null) {
-    update_acorns_by_pk(
-      pk_columns: { id: $id }
-      _set: { name: $name, body: $body }
-    ) {
-      id
-    }
-  }
-`;
-
 export const GET_ACORNS = gql`
-  query GetAcorns {
-    acorns(order_by: { id: asc }) {
+  query GetAcorns($username: String!) {
+    acorns(
+      order_by: { id: asc }
+      where: { creator: { username: { _eq: $username } } }
+    ) {
       id
       name
       body
@@ -51,19 +48,41 @@ export const GET_ACORNS = gql`
   }
 `;
 
-const api = {
+export const UPDATE_ACORN = gql`
+  mutation UpdateAcorn($id: uuid!, $name: String = null, $body: String!) {
+    update_acorns_by_pk(
+      pk_columns: { id: $id }
+      _set: { body: $body, name: $name }
+    ) {
+      id
+      name
+      body
+      updated_at
+    }
+  }
+`;
+
+const api = (username: string) => ({
   getTags: async function (): Promise<string[]> {
     const { data } = await gqlClient.query<{ tags: Tag[] }>({
       query: GET_TAGS,
+      variables: {
+        username,
+      },
     });
     return data.tags.map(({ name }) => name);
   },
+
   getAcorns: async function (): Promise<Acorn[]> {
     const { data } = await gqlClient.query<{ acorns: Acorn[] }>({
       query: GET_ACORNS,
+      variables: {
+        username,
+      },
     });
     return data.acorns;
   },
+
   updateAcorn: async function (variables: Acorn): Promise<any> {
     const { data } = await gqlClient.mutate<{ acorn: Acorn }>({
       mutation: UPDATE_ACORN,
@@ -71,6 +90,6 @@ const api = {
     });
     return data;
   },
-};
+});
 
 export default api;

@@ -1,19 +1,25 @@
+import { useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { Acorn as AcornType } from "../lib/api";
+import { Acorn, GET_ACORNS } from "../lib/api";
 
-const AcornsList: React.FC<{ acorns: AcornType[] }> = ({ acorns }) => (
-  <ol id="acorns">
-    {acorns.map((acorn) => (
-      <li key={acorn.id}>
-        {acorn.body.slice(0, 50)}
-        {/* {acorn.acorns_tags.map(({ tag }) => (
-            <span className="tag" key={tag.name}>
-              {tag.name}
-            </span>
-          ))} */}
-      </li>
-    ))}
-  </ol>
-);
+const AcornsList: React.FC = () => {
+  const { data } = useQuery<{ acorns: Acorn[] }>(GET_ACORNS, {
+    variables: {
+      username: "john",
+    },
+  });
+
+  return (
+    <ol id="acorns">
+      {data &&
+        data.acorns.map((acorn) => (
+          <li key={acorn.id}>
+            {acorn.name && <h3>{acorn.name}</h3>}
+            {acorn.body.slice(0, 50)}
+          </li>
+        ))}
+    </ol>
+  );
+};
 
 export default AcornsList;
